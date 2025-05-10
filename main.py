@@ -1,22 +1,16 @@
 import os
 from flask import Flask, flash, request, redirect, render_template
-from dotenv import load_dotenv, dotenv_values
+from dotenv import load_dotenv
 import speechRecognition
 
-load_dotenv()
-print(os.getenv('AAI_KEY'))
-UPLOAD_FOLDER = os.path.join(os.path.abspath(os.path.join(__file__,os.pardir)), "audio/")
-ALLOWED_EXTENSIONS = {'mp3', 'wav'}
-
-print(UPLOAD_FOLDER)
-
 app = Flask(__name__, template_folder='static')
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+load_dotenv()
 
 
 def allowed_file(filename):
     return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+           filename.rsplit('.', 1)[1].lower() == 'mp3'
 
 
 @app.route('/')
