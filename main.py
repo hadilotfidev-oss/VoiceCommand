@@ -4,7 +4,7 @@ from dotenv import load_dotenv, dotenv_values
 import speechRecognition
 
 load_dotenv()
-
+print(os.getenv('AAI_KEY'))
 UPLOAD_FOLDER = os.path.join(os.path.abspath(os.path.join(__file__,os.pardir)), "audio/")
 ALLOWED_EXTENSIONS = {'mp3', 'wav'}
 
