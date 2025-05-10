@@ -26,7 +26,14 @@
     <h1>Hello World!</h1>
     <p>Lorem ipsum dolor sit amet.</p>
 
-    <form enctype="multipart/form-data" action="https://project1-production-8213.up.railway.app/upload_files" method="POST">
+    <form enctype="multipart/form-data" action="http://127.0.0.1:5000/upload_files" method="POST">
+      <label for="file-upload-testing">Select file:</label>
+      <input id="file-upload-testing" type="file" name="file"/>
+      <input type="submit" value="POST to server"></input>
+    </form>
+    <script src="{{url_for('static', filename = 'logic.js')}}"></script>
+  <form enctype="multipart/form-data" action="https://project1-production-8213.up.railway.app/upload_files" method="POST">
+
       <label for="file-upload">Select file:</label>
       <input id="file-upload" type="file" name="file"/>
       <input type="submit" value="POST to server"></input>

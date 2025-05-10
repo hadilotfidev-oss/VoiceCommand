@@ -1,9 +1,9 @@
 import assemblyai as aai
 
 
-def recognize(audio_file):
+def recognize(audio_file, api_key):
 
-    aai.settings.api_key = "3122572906cb458885fa3c123f294554"
+    aai.settings.api_key = api_key
     audio_file = audio_file
     config = aai.TranscriptionConfig(speech_model=aai.SpeechModel.best)
     transcript = aai.Transcriber(config=config).transcribe(audio_file)

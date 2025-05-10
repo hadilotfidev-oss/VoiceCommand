@@ -1,7 +1,9 @@
 import os
 from flask import Flask, flash, request, redirect, render_template
-
+from dotenv import load_dotenv, dotenv_values
 import speechRecognition
+
+load_dotenv()
 
 UPLOAD_FOLDER = os.path.join(os.path.abspath(os.path.join(__file__,os.pardir)), "audio/")
 ALLOWED_EXTENSIONS = {'mp3', 'wav'}
@@ -36,7 +38,7 @@ def upload_file():
             flash('No selected file')
             return redirect(request.url)
         if file and allowed_file(file.filename):
-            return speechRecognition.recognize(file)
+            return speechRecognition.recognize(file, os.getenv('AAI_KEY'))
 
 
 if __name__ == '__main__':
