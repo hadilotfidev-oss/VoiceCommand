@@ -11,6 +11,7 @@ print(UPLOAD_FOLDER)
 app = Flask(__name__, template_folder='static')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -20,7 +21,7 @@ def allowed_file(filename):
 def home():
     message = "hello world"
     print(message)
-    return render_template('index.html', message=message)
+    return render_template('index.html')
 
 
 @app.route('/upload_files', methods=['GET', 'POST'])
