@@ -19,8 +19,6 @@ def allowed_file(filename):
 
 @app.route('/')
 def home():
-    message = "hello world"
-    print(message)
     return render_template('index.html')
 
 
