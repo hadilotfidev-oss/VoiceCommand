@@ -1,28 +1,119 @@
-.submit-button {
+/* style.css */
+body {
+    font-family: Arial, sans-serif;
     background-color: white;
-    border: thin solid blue;
-    border-radius: 4px;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h1 {
+    color: #333;
+}
+
+/* Record Button Styles */
+#btnStart {
+    background-color: #636262;
+    color: white;
+    border: none;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    padding: 0;
+    outline: none;
+}
+
+#btnStart:hover {
+    background-color: #000000;
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+#btnStart:active {
+    transform: scale(0.98);
+}
+
+#btnStart img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 5px;
+    transition: transform 0.2s ease;
+}
+
+#btnStart:hover img {
+    transform: scale(1.1);
+}
+
+#btnStart span {
+    font-size: 14px;
+    font-weight: bold;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Audio Player Styles */
+#audioPlay {
+    width: 300px;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Image Toggler Styles */
+#imageToggleContainer {
+    margin-top: 30px;
+    text-align: center;
+}
+
+#toggleButton {
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
     display: inline-block;
-    font: inherit;
-    line-height: 1.5em;
-    padding: 0.7em
+    font-size: 16px;
+    margin-top: 15px;
+    cursor: pointer;
+    border-radius: 25px;
+    transition: all 0.3s ease;
 }
 
-.submit-button:hover {
-    background-color: skyblue;
+#toggleButton:hover {
+    background-color: #0077A3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-[type=file] {
-
-    background-color: white;
-    border: thin solid blue;
-    border-radius: 4px;
-    display: inline-block;
-    font: inherit;
-    line-height: 1.5em;
-    padding: 0.5em 3.5em 0.5em 1em;
+#toggleImage {
+    width: 300px;
+    height: 300px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 5px;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
 }
 
-[type=file]:hover {
-    background-color: skyblue;
+#toggleImage:hover {
+    transform: scale(1.02);
 }
