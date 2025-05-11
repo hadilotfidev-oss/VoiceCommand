@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Voice</title>
+    <link rel="stylesheet" href="{{url_for('static', filename = 'styles.css')}}">
+  </head>
+  <body>
+    <header>
+    <h1>Record and Play Audio</h1>
+    </header>
+<!--button for 'start recording'-->
+    <p>
+        <button id="btnStart">
+            <img src="/static/images/play.jpeg" width="24" height="24">
+            <span>start</span>
+        </button>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <!--button for 'stop recording'-->
+    </p>
+
+
+<!--for play the audio-->
+    <audio id="audioPlay" controls></audio>
+
+    <br>
+
+    <p id="generated-text">Place Holder</p>
+
+    <script src="{{url_for('static', filename = 'logic.js')}}"></script>
+
+  </body>
+</html>
