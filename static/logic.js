@@ -64,14 +64,13 @@
 
             // get the html tag that holds the transcribed text
             const generatedText = document.getElementById('generated-text')
-            const console = document.getElementById('console')
 
             // append the created file to form data
             const formData = new FormData();
             formData.append('file', file, 'audio.mp3');
             
             // send the form data to the server for processing
-            fetch('https://voicecommand.up.railway.app/upload_files', {
+            fetch('https://project1-production-8213.up.railway.app/upload_files', {
                 method: 'POST',
                 body:formData,
             })
@@ -92,19 +91,16 @@
 
             // get the transcribed data and fill it in the html tag
             .then((data) => {
-                fetch(url + data, {
-                    method: 'GET',
-                    headers:{
-                         'ngrok-skip-browser-warning': 'true',
-                    },
-                    })
-                .then((res) => {
-                    if(!res.ok) {
-                        throw new Error("HTTP error " + res.status)
-                    }
-                    console.innerHTML += `<p>LIGHT TURNED ${data}</p>`
-                })
-                generatedText.innerHTML = `Command: "${data}"`
+                fetch(`${url}${data}`, {
+                "credentials": "include",
+                "headers": {
+                    "Upgrade-Insecure-Requests": "1",
+                    "Sec-Fetch-Site": "cross-site",
+                },
+                "method": "GET",
+                "mode": "cors"
+                });
+                generatedText.innerHTML = `Command: "${url}${data}"`
             })
             .catch((err) => ('Error occured', err))
 
