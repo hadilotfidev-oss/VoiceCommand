@@ -70,7 +70,7 @@
             formData.append('file', file, 'audio.mp3');
             
             // send the form data to the server for processing
-            fetch('https://project1-production-8213.up.railway.app/upload_files', {
+            fetch('https://voicecommand.up.railway.app/upload_files', {
                 method: 'POST',
                 body:formData,
             })
