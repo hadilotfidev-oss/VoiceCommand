@@ -7,8 +7,16 @@
   </head>
   <body>
     <header>
-    <h1>Record and Play Audio</h1>
+    <h1>Voice Command</h1>
     </header>
+
+    <h3>Enter the arduino's URL here</h3>
+    <p>
+      <input type="text" name="url_input" id="url_input">
+      <button id="save">Save</button>
+    </p>
+
+
 <!--button for 'start/stop recording'-->
     <p>
         <button id="btnStart">
@@ -17,14 +25,12 @@
     </p>
 
 
-<!--for play the audio-->
-    <audio id="audioPlay" controls></audio>
-
-    <br>
-
 <!-- for holding transcribed text -->
     <p id="generated-text">Command: </p>
+    <br>
+    <div id="console">
 
+    </div>
     <script src="{{url_for('static', filename = 'logic.js')}}"></script>
 
   </body>

@@ -1,3 +1,13 @@
+    // select the arduino's url
+    let url_input = document.getElementById('url_input')
+    let save = document.getElementById('save')
+    let url = ""
+
+    save.addEventListener('click', function(ev) {
+        url = url_input.value
+        alert("URL: " + url + " Saved")
+    })
+
     // counter for start/stop button toggle
     let counter = 1;
 
@@ -12,13 +22,9 @@
     // 'then()' method returns a Promise
     .then(function (mediaStreamObj) {
 
-
         // Start recording
         let start = document.getElementById('btnStart');
         let playIcon = start.querySelector('img');
-
-        // audio tag for play the audio
-        let playAudio = document.getElementById('audioPlay');
 
         // Pass the audio stream to mediaRecorder API
         let mediaRecorder = new MediaRecorder(mediaStreamObj);
@@ -58,16 +64,24 @@
 
             // get the html tag that holds the transcribed text
             const generatedText = document.getElementById('generated-text')
+            const console = document.getElementById('console')
 
             // append the created file to form data
             const formData = new FormData();
             formData.append('file', file, 'audio.mp3');
             
             // send the form data to the server for processing
-            fetch('https://project1-production-8213.up.railway.app/upload_files', {
+            fetch('https://voicecommand.up.railway.app/upload_files', {
                 method: 'POST',
                 body:formData,
             })
+
+            // testing fetch
+//            fetch('http://127.0.0.1:5000/upload_files', {
+//                method: 'POST',
+//                body:formData,
+//            })
+
             // handle response from the server
             .then((res) => {
                 if (!res.ok) {
@@ -78,19 +92,24 @@
 
             // get the transcribed data and fill it in the html tag
             .then((data) => {
+                fetch(url + data, {
+                    method: 'GET',
+                    headers:{
+                         'ngrok-skip-browser-warning': 'true',
+                    },
+                    })
+                .then((res) => {
+                    if(!res.ok) {
+                        throw new Error("HTTP error " + res.status)
+                    }
+                    console.innerHTML += `<p>LIGHT TURNED ${data}</p>`
+                })
                 generatedText.innerHTML = `Command: "${data}"`
             })
             .catch((err) => ('Error occured', err))
 
             // empty the audio chunk array for subsequent uses
             dataArray = [];
-
-            // create url for the audio blob so it can be played by the audio tag
-            let audioSrc = window.URL
-                .createObjectURL(audioData);
-
-            // Pass the audio url to the audio tag
-            playAudio.src = audioSrc;
         }
     })
 

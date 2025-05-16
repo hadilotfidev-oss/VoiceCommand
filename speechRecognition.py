@@ -15,4 +15,12 @@ def recognize(audio_file, api_key):
     if transcript.status == "error":
         raise RuntimeError(f"Transcription failed: {transcript.error}")
 
-    return transcript.text
+    if transcript.text.find("light") != -1 :
+        if transcript.text.find("on") != -1:
+            return "ON"
+        elif transcript.text.find("off") != -1:
+            return "OFF"
+        else:
+            return "invalid"
+    else:
+        return "invalid"
