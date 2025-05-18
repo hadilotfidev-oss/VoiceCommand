@@ -15,13 +15,19 @@ def recognize(audio_file, api_key):
         raise RuntimeError(f"Transcription failed: {transcript.error}")
     # check if the text maps to a command
     command = transcript.text.upper()
+    # controls light
     if command.find("LIGHT") != -1 :
+        # turns light on
         if command.find("ON") != -1:
             path = "ON"
+        # turns light on
         elif command.find("OFF") != -1:
             path = "OFF"
         else:
             path = "invalid"
+    # reads temperature
+    elif command.find("TEMPERATURE"):
+        path = "TEMP"
     else:
         path = "invalid"
         
