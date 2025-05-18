@@ -86,9 +86,9 @@ h1 {
 
 /* console styling */
 #console {
-    width: 50%;
+    width: 58%;
     background-color: #eeeeee;
-    height: 15em;
+    height: 18em;
     padding: 0.6em;
     overflow:scroll;
     scrollbar-width: 1em;
@@ -96,7 +96,7 @@ h1 {
 }
 
 #console p {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .command {

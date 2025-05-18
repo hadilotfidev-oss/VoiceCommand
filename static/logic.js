@@ -84,7 +84,9 @@
             // handle response from the server
             .then((res) => {
                 if (!res.ok) {
-                    throw new Error("HTTP error " + res.status)
+                    console.innerHTML += `<p class="error">error getting response from server</p>`;
+                    throw new Error("HTTP error " + res.status);
+                    
                 }
                 return res.json();
             })
@@ -109,6 +111,7 @@
                     // handle response from the arduino
                     .then((response) => {
                         if (!response.ok) {
+                            console.innerHTML += `<p class="error">error getting response from arduino</p>`;
                             throw new Error("HTTP error" + response.status)
                         }
                         return response.text();
