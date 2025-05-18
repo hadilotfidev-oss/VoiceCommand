@@ -14,10 +14,11 @@ def recognize(audio_file, api_key):
     if transcript.status == "error":
         raise RuntimeError(f"Transcription failed: {transcript.error}")
     # check if the text maps to a command
-    if transcript.text.find("light") != -1 :
-        if transcript.text.find("on") != -1:
+    command = transcript.text.upper()
+    if command.find("LIGHT") != -1 :
+        if command.find("ON") != -1:
             path = "ON"
-        elif transcript.text.find("off") != -1:
+        elif command.find("OFF") != -1:
             path = "OFF"
         else:
             path = "invalid"
