@@ -1,5 +1,5 @@
 import os
-from flask import Flask, flash, request, redirect, render_template
+from flask import Flask, flash, request, redirect, render_template, jsonify
 from dotenv import load_dotenv
 import speechRecognition
 
@@ -37,7 +37,7 @@ def upload_file():
         # If there's a file and is of type mp3 then transcribe to text
         if file and allowed_file(file.filename):
             generated_text = speechRecognition.recognize(file, os.getenv('AAI_KEY'))
-            return generated_text
+            return jsonify(generated_text)
 
 
 if __name__ == '__main__':

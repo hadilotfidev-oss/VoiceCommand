@@ -33,11 +33,11 @@
         start.addEventListener('click', function (ev) {
             if(counter % 2 == 1){
                 mediaRecorder.start();
-                playIcon.src = "/static/images/stop.jpeg";
+                playIcon.src = "/static/images/stop.png";
             }
             else{
                 mediaRecorder.stop();
-                playIcon.src = "/static/images/play.jpeg";
+                playIcon.src = "/static/images/play.png";
             }
             counter++;
         })
@@ -63,7 +63,7 @@
             let file = new File([audioData], "audio.mp3", {type: 'audio/mp3',});
 
             // get the html tag that holds the transcribed text
-            const generatedText = document.getElementById('generated-text')
+            const console = document.getElementById('console')
 
             // append the created file to form data
             const formData = new FormData();
@@ -76,33 +76,50 @@
             })
 
             // testing fetch
-//            fetch('http://127.0.0.1:5000/upload_files', {
-//                method: 'POST',
-//                body:formData,
-//            })
+        //    fetch('http://127.0.0.1:5000/upload_files', {
+        //        method: 'POST',
+        //        body:formData,
+        //    })
 
             // handle response from the server
             .then((res) => {
                 if (!res.ok) {
                     throw new Error("HTTP error " + res.status)
                 }
-                return res.text();
+                return res.json();
             })
-
-            // get the transcribed data and fill it in the html tag
             .then((data) => {
-                fetch(`${url}${data}`, {
-                "credentials": "include",
-                "headers": {
-                    "Upgrade-Insecure-Requests": "1",
-                    "Sec-Fetch-Site": "cross-site",
-                },
-                "method": "GET",
-                "mode": "cors"
-                });
-                generatedText.innerHTML = `Command: "${url}${data}"`
+                // check if the server returned a valid command
+                if(data[1] == "invalid") {
+                    // print error message
+                    console.innerHTML += `<p class="error">"${data[0]}" is not a valid command`
+                }else {
+                    // get the transcribed data and fill it in the html tag
+                    console.innerHTML += `<p class="command"><b>Command:</b> ${data[0]}</p>`;
+
+                    // send the request to the arduino
+                    fetch(`${url}${data[1]}`, {
+                    "headers": {
+                        "Sec-Fetch-Site": "cross-site",
+                        "ngrok-skip-browser-warning": "true"
+                    },
+                    "method": "GET",
+                    "mode": "cors"
+                    })
+                    // handle response from the arduino
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error("HTTP error" + response.status)
+                        }
+                        return response.text();
+                    })
+                    .then((text) => {
+                        console.innerHTML += `<p class="response">${text}</p>`;
+                    })
+                    .catch((error) => ('Error occured', error))
+            }
             })
-            .catch((err) => ('Error occured', err))
+            .catch((err) => ('Error occured', err));
 
             // empty the audio chunk array for subsequent uses
             dataArray = [];

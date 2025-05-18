@@ -2,7 +2,6 @@ import assemblyai as aai
 
 
 def recognize(audio_file, api_key):
-
     # set client key from parameter
     aai.settings.api_key = api_key
     # set audio file from parameter
@@ -14,13 +13,15 @@ def recognize(audio_file, api_key):
     # raise error if transcription failed
     if transcript.status == "error":
         raise RuntimeError(f"Transcription failed: {transcript.error}")
-
+    # check if the text maps to a command
     if transcript.text.find("light") != -1 :
         if transcript.text.find("on") != -1:
-            return "ON"
+            path = "ON"
         elif transcript.text.find("off") != -1:
-            return "OFF"
+            path = "OFF"
         else:
-            return "invalid"
+            path = "invalid"
     else:
-        return "invalid"
+        path = "invalid"
+        
+    return [transcript.text, path]
