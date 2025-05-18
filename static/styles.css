@@ -86,9 +86,9 @@ h1 {
 
 /* console styling */
 #console {
-    width: 58%;
+    width: 68%;
     background-color: #eeeeee;
-    height: 18em;
+    height: 24em;
     padding: 0.6em;
     overflow:scroll;
     scrollbar-width: 1em;
