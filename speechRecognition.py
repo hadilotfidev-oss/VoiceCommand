@@ -26,7 +26,7 @@ def recognize(audio_file, api_key):
         else:
             path = "invalid"
     # reads temperature
-    elif command.find("TEMPERATURE"):
+    elif command.find("TEMPERATURE") != -1:
         path = "TEMP"
     else:
         path = "invalid"
